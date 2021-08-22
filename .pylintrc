@@ -1,0 +1,17 @@
+[MESSAGES CONTROL]
+
+#using pylinter directly, doesn't pick up some of this
+#documentation missing WTF not gettin picked up??
+#disable=C0111
+
+#wrong variable name format WTF only works in pylinter prefs??
+# WAIT now it works here? see .pylint.rc for what these mean
+disable=C0103,C0103,C0111,C0301,W0511,R0913,R0914
+
+[FORMAT]
+
+# Maximum number of characters on a single line.
+#max-line-length=100
+
+# String used as indentation unit. This is usually " " (4 spaces) or "\t" (1 tab).
+indent-string='    '

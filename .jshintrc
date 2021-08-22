@@ -1,0 +1,11 @@
+{
+  "esversion": 9,
+  "strict": true,
+  "undef": true,
+  "globals": {
+    "console": true,
+    "document": true,
+    "window": true,
+    "alert": true
+  }
+}
