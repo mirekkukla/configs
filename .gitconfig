@@ -1,0 +1,14 @@
+[user]
+	email = mirekkukla@gmail.com
+	name = Mirek Kukla
+[core]
+	pager = less -FRSX
+	editor = vim
+	autocrlf = input
+	eol = lf
+[push]
+	default = current
+[help]
+	autocorrect = 5
+[protocol]
+	version = 2
