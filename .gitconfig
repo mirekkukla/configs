@@ -12,3 +12,5 @@
 	autocorrect = 5
 [protocol]
 	version = 2
+[pull]
+	ff = only
