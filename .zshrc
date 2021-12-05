@@ -188,11 +188,11 @@ restoreDatabase() {
 # Restore databases
 alias restoreprod='restoreDatabase rynlyproduction rynlyproduction'
 alias restoreuat='restoreDatabase rynlyuat rynlyuat'
-alias restoreqa='mongorestore rynlyqa rynlyqa'
+alias restoreqa='restoreDatabase rynlyqa rynlyqa'
 
 alias restorelocalprod='restoreDatabase rynlylocalproduction rynlyproduction'
 alias restorelocaluat='restoreDatabase rynlylocaluat rynlyuat'
-alias restorelocalqa='mongorestore rynlylocalqa rynlyqa'
+alias restorelocalqa='restoreDatabase rynlylocalqa rynlyqa'
 
 # Live log stream
 alias logprod="curl -u \\\$rynlyproduction:`cat ~/.ssh/rynly/logstream/prodtoken` https://rynlyproduction.scm.azurewebsites.net/api/logstream"
