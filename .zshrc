@@ -14,13 +14,20 @@ export PATH=/usr/local/mysql/bin:$PATH
 # I updated node using "npm n" and now shit don't work
 export PATH=/usr/local/Cellar/node/12.4.0/bin:$PATH
 
-
 # Android tools
 export PATH=/Users/mirek/Library/Android/sdk/platform-tools:$PATH
 
 # Make gem happy
 # https://github.com/rbenv/rbenv/issues/1267
 export GEM_HOME="$HOME/.gem"
+
+# Auto-added when installing nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Make command-line gradle use the same java version as Android Studio (part of upgrade to gradle 8)
+export JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home"
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -50,6 +57,9 @@ stty -ixon
 
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
+
+# Uncomment the following line if pasting URLs and other text is messed up.
+DISABLE_MAGIC_FUNCTIONS=true
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -136,6 +146,8 @@ learn() {
 #####################
 alias gcom="git commit -am 'auto-commit'"
 alias gdev="git stash | grep 'No local changes' && git checkout develop && git pull --rebase origin develop || (git checkout develop && git pull --rebase origin develop && git stash pop)"
+alias greb="git pull --rebase origin develop"
+alias grebc="git add . && git rebase --continue"
 
 gnew() {
     git checkout -b mirek/"$1"
@@ -149,25 +161,14 @@ gnew() {
 alias goRYN="cd ~/workspace/rynly/rynly.web"
 
 # Connect to databases
-alias mongouat="mongo 'mongodb+srv://rynlyuatdatabase-mnn1v.gcp.mongodb.net/rynlyuat' -u mirek_read_only -p`cat ~/.ssh/rynly/rynly_atlasdb_mirek_read_only`"
-alias mongouatwrite="mongo 'mongodb+srv://rynlyuatdatabase-mnn1v.gcp.mongodb.net/rynlyuat' -u mirek_read_write -p`cat ~/.ssh/rynly/rynly_atlasdb_mirek_read_write`"
+alias mongouat="mongosh 'mongodb+srv://rynlyuatdatabase-mnn1v.gcp.mongodb.net/rynlyuat' -u mirek_read_only -p `cat ~/.ssh/rynly/rynly_atlasdb_mirek_read_only`"
+alias mongouatwrite="mongosh 'mongodb+srv://rynlyuatdatabase-mnn1v.gcp.mongodb.net/rynlyuat' -u mirek_read_write -p `cat ~/.ssh/rynly/rynly_atlasdb_mirek_read_write`"
 
-alias mongoqa="mongo 'mongodb+srv://rynlyqadatabase-mnn1v.gcp.mongodb.net/rynlyqa' -u mirek_read_only -p`cat ~/.ssh/rynly/rynly_atlasdb_mirek_read_only`"
-alias mongoqawrite="mongo 'mongodb+srv://rynlyqadatabase-mnn1v.gcp.mongodb.net/rynlyqa' -u mirek_read_write -p`cat ~/.ssh/rynly/rynly_atlasdb_mirek_read_write`"
+alias mongoqa="mongosh 'mongodb+srv://rynlyqadatabase-mnn1v.gcp.mongodb.net/rynlyqa' -u mirek_read_only -p `cat ~/.ssh/rynly/rynly_atlasdb_mirek_read_only`"
+alias mongoqawrite="mongosh 'mongodb+srv://rynlyqadatabase-mnn1v.gcp.mongodb.net/rynlyqa' -u mirek_read_write -p `cat ~/.ssh/rynly/rynly_atlasdb_mirek_read_write`"
 
-alias mongotest="mongo 'mongodb+srv://rynlytest-ehkoq.gcp.mongodb.net/rynlytestdb'  -u mirek_test_admin -p`cat ~/.ssh/rynly/rynly_atlasdb_mirek_test_admin`"
-
-alias mongodemo="mongo 'mongodb+srv://rynlydemodatabase-k05la.gcp.mongodb.net/rynlydemo' -u mirek_read_only -p`cat ~/.ssh/rynly/rynly_atlasdb_mirek_read_only`"
-alias mongodemowrite="mongo 'mongodb+srv://rynlydemodatabase-k05la.gcp.mongodb.net/rynlydemo' -u mirek_read_write -p`cat ~/.ssh/rynly/rynly_atlasdb_mirek_read_write`"
-
-alias mongosunshine="mongo 'mongodb+srv://sunshinedivision.ejrut.gcp.mongodb.net/rynlysunshinedivision' -u mirek_read_only -p`cat ~/.ssh/rynly/rynly_atlasdb_mirek_read_only`"
-alias mongosunshinewrite="mongo 'mongodb+srv://sunshinedivision.ejrut.gcp.mongodb.net/rynlysunshinedivision' -u mirek_read_write -p`cat ~/.ssh/rynly/rynly_atlasdb_mirek_read_write`"
-
-alias mongoplatform1="mongo 'mongodb+srv://platform1.fpstb.mongodb.net/rynlyplatform1' -u mirek_read_only -p`cat ~/.ssh/rynly/rynly_atlasdb_mirek_read_only`"
-alias mongoplatform1write="mongo 'mongodb+srv://platform1.fpstb.mongodb.net/rynlyplatform1' -u mirek_read_write -p`cat ~/.ssh/rynly/rynly_atlasdb_mirek_read_write`"
-
-alias mongoproduction="mongo 'mongodb+srv://rynlyproductiondatabase-mnn1v.gcp.mongodb.net/rynlyproduction' -u mirek_read_only -p`cat ~/.ssh/rynly/rynly_atlasdb_mirek_read_only`"
-alias mongoproductionwrite="mongo 'mongodb+srv://rynlyproductiondatabase-mnn1v.gcp.mongodb.net/rynlyproduction' -u mirek_read_write -p`cat ~/.ssh/rynly/rynly_atlasdb_mirek_read_write`"
+alias mongoproduction="mongosh 'mongodb+srv://rynlyproductiondatabase-mnn1v.gcp.mongodb.net/rynlyproduction' -u mirek_read_only -p `cat ~/.ssh/rynly/rynly_atlasdb_mirek_read_only`"
+alias mongoproductionwrite="mongosh 'mongodb+srv://rynlyproductiondatabase-mnn1v.gcp.mongodb.net/rynlyproduction' -u mirek_read_write -p `cat ~/.ssh/rynly/rynly_atlasdb_mirek_read_write`"
 
 # Dump databases
 alias dumpprod='mongodump --ssl -d rynlyproduction -h rynlyproductiondatabase-shard-0/rynlyproductiondatabase-shard-00-00-mnn1v.gcp.mongodb.net:27017 -u mirek_read_only -p`cat ~/.ssh/rynly/rynly_atlasdb_mirek_read_only` --authenticationDatabase admin -o ~/rynly_db_dumps/rynlyproduction_`date '+%Y_%m_%d'`'
@@ -178,21 +179,57 @@ alias dumplocalprod='mongodump -d rynlyproduction -o ~/rynly_db_dumps/rynlylocal
 alias dumplocaluat='mongodump -d rynlyuat -o ~/rynly_db_dumps/rynlylocaluat_`date '+%Y_%m_%d'`'
 alias dumplocalqa='mongodump -d rynlyqa -o ~/rynly_db_dumps/rynlylocalqa_`date '+%Y_%m_%d'`'
 
-# Pass a folder prefix as the firm argment and the name of the db as the second (e.g. 'restoreDatabase rynlylocalproduction rynlyproduction'
+# Arguments:
+# 1) folder prefix
+# 2) the name of the db
+# 3) [optional] subdomain of firm you want to change to 'localfirm' 
+# e.g.= 'restoreDatabase rynlylocalproduction rynlyproduction beta'
 restoreDatabase() {
-    LATEST_FOLDER=`ls -lrt ~/rynly_db_dumps | grep $1 | tail -n 1 | awk '{print $NF}'`
-    echo $LATEST_FOLDER
-    mongorestore --drop -d $2 ~/rynly_db_dumps/$LATEST_FOLDER/$2
+    if [[ -n $4 ]]; then
+        FOLDER=$4
+        echo "Using manually specified folder \"$FOLDER\""
+    else
+        FOLDER=`ls -lrt ~/rynly_db_dumps | grep $1 | tail -n 1 | awk '{print $NF}'`
+        echo "Using latest folder \"$FOLDER\""
+    fi
+
+    mongorestore --drop -d $2 ~/rynly_db_dumps/$FOLDER/$2
+
+    if [[ -n $3 ]]; then
+        changeSubdomain $2 $3 "localfirm"
+    else
+        echo "No firm subdomain provided"
+    fi
+}
+
+# Arguments:
+# 1) database name
+# 2) current subdomain of firm you want to change the subdomain for
+# 3) desired subdomain
+# e.g. 'changeSubdomain "rynlyqa" "qa1" "localfirm"'
+changeSubdomain() {
+    if [[ -n $1 && -n $2 && -n $3 ]]; then
+        DB_NAME=$1
+        CURRENT_SUBDOMAIN=$2
+        DESIRED_SUBDOMAIN=$3
+    else
+        echo "Must provide both an current and a desired subdomain"
+        exit(1)
+    fi
+
+    echo "Changing subdomain of \"$DB_NAME\" firm with current subdomain \"$CURRENT_SUBDOMAIN\" to \"$DESIRED_SUBDOMAIN\""
+
+    mongosh $DB_NAME --eval "db.Firms.update({Subdomain: \"$CURRENT_SUBDOMAIN\"}, {\$set: {Subdomain: \"$DESIRED_SUBDOMAIN\"}})"
 }
 
 # Restore databases
-alias restoreprod='restoreDatabase rynlyproduction rynlyproduction'
-alias restoreuat='restoreDatabase rynlyuat rynlyuat'
-alias restoreqa='restoreDatabase rynlyqa rynlyqa'
+restoreprod() { restoreDatabase "rynlyproduction" "rynlyproduction" $1 $2 }
+restoreuat() { restoreDatabase "rynlyuat" "rynlyuat" $1 $2 }
+restoreqa() { restoreDatabase "rynlyqa" "rynlyqa" $1 $2 }
 
-alias restorelocalprod='restoreDatabase rynlylocalproduction rynlyproduction'
-alias restorelocaluat='restoreDatabase rynlylocaluat rynlyuat'
-alias restorelocalqa='restoreDatabase rynlylocalqa rynlyqa'
+restorelocalprod() { restoreDatabase rynlylocalproduction rynlyproduction $1 $2 }
+restorelocaluat() { restoreDatabase rynlylocaluat rynlyuat $1 $2 }
+restorelocalqa() { restoreDatabase rynlylocalqa rynlyqa $1 $2 }
 
 # Live log stream
 alias logprod="curl -u \\\$rynlyproduction:`cat ~/.ssh/rynly/logstream/prodtoken` https://rynlyproduction.scm.azurewebsites.net/api/logstream"
@@ -289,3 +326,22 @@ if [ -f '/Users/mirek/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/mirek/goo
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/mirek/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/mirek/google-cloud-sdk/completion.zsh.inc'; fi
+
+
+######################
+# BREW ETC ON M1X MAC
+######################
+alias pod='arch -x86_64 pod'
+alias ibrew='arch -x86_64 /usr/local/bin/brew'
+
+######################
+# STARTUP SCRIPTS
+######################
+
+# Run azurite in the background (makes it faster to run the app locally by using local blobstore)
+mkdir -p ~/azurite_files && azurite --location ~/azurite_files >> ~/azurite_files/log.txt 2>&1 &
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+[ -f "/Users/mirek/.ghcup/env" ] && source "/Users/mirek/.ghcup/env" # ghcup-env
